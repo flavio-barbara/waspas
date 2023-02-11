@@ -12,16 +12,18 @@
 #'
 #' @examples
 #' normalize(dfMatrix, vCost_Benefit, initCol, initRow)
-#' normalized_matrix <- normalize(row_values_matrix, flags_Cost_Benefit)
+#' normalized_matrix <- normalize(row_values_matrix, flags_Cost_Benefit, initCol = 2, initRow = 4)
 #' @export
-#' @importFrom dplyr "%>%"
+#' @importFrom readxl "%>%"
 
 
 #' #################### Normalization: dfMatrix Matrix  ==>  AxCNorm Matrix
 
-normalize <- function(dfMatrix, vCost_Benefit, initCol = 1, initRow = 1) {
+normalize <- function(dfMatrix, vCost_Benefit, initRow = 1, initCol = 1) {
   # Test vector of flags X matrix of values dimentions
-  if (length(vCost_Benefit) != ncol(dfMatrix) - initCol + 1) {
+  browser()
+  workingMatrix <- dfMatrix[initRow:nrow(dfMatrix), initCol:ncol(dfMatrix)]
+  if (length(vCost_Benefit) != ncol(workingMatrix)) {
     return("Error #01: Vector of Cost-Benefit flags must be same size of number of Criteria")
   }
   # Test flags contents, just strings initiated with B (Benefit) ou C (Cost) are permitted
@@ -29,18 +31,18 @@ normalize <- function(dfMatrix, vCost_Benefit, initCol = 1, initRow = 1) {
   if (!identical(justBorC, c("B","C"))) {
     return("Error #02: Vector of flags must contains just strings initiated with B or C (i.e. b,c,B,C,Cost,Benefit,Ben etc.)")
   }
-  workingMatrix <- dfMatrix
+
   flagsCxB <- toupper(substr(vCost_Benefit,1,1))
-  for(iCol in initCol:ncol(dfMatrix)){
-    vAlternativeValues <- dfMatrix[initRow:nrow(dfMatrix),iCol]
+  for(iCol in 1:ncol(workingMatrix)){
+    vAlternativeValues <- workingMatrix[1:nrow(workingMatrix),iCol]
     vAlternativeValues <- sapply(vAlternativeValues, as.numeric)
     maxv <- max(vAlternativeValues)
     minv <- min(vAlternativeValues)
-    for(iRow in initRow:nrow(dfMatrix)){
-      if (flagsCxB[iCol-1] == "C"){
-        workingMatrix[iRow,iCol] <- toString(minv / as.numeric(dfMatrix[iRow,iCol]))
+    for(iRow in initRow:nrow(workingMatrix)){
+      if (flagsCxB[iCol] == "C"){
+        workingMatrix[iRow,iCol] <- toString(minv / as.numeric(workingMatrix[iRow,iCol]))
       } else {  #"Cost-Benefit"] == "B" (Benefit)
-        workingMatrix[iRow,iCol] <- toString(as.numeric(dfMatrix[iRow,iCol]) / maxv)
+        workingMatrix[iRow,iCol] <- toString(as.numeric(workingMatrix[iRow,iCol]) / maxv)
       }
     }}
   return(workingMatrix)
