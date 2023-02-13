@@ -4,12 +4,12 @@
 \alias{normalize}
 \title{normalize}
 \usage{
-normalize(dfMatrix, vCost_Benefit, initCol = 1, initRow = 1)
+normalize(dfMatrix, vCost_Benefit, initRow = 1, initCol = 1)
 }
 \arguments{
-\item{initCol}{First Column with values of input matrix (to avoid metadata), Default = 1}
-
 \item{initRow}{First Row with values of input matrix (to avoid metadata), Default = 1}
+
+\item{initCol}{First Column with values of input matrix (to avoid metadata), Default = 1}
 
 \item{values}{A data set object with Alternatives X Criteria  values to be normalized}
 
@@ -25,5 +25,5 @@ Normalize the values of Alternatives X Criteria matrix according to a given
 }
 \examples{
 normalize(dfMatrix, vCost_Benefit, initCol, initRow)
-normalized_matrix <- normalize(row_values_matrix, flags_Cost_Benefit)
+normalized_matrix <- normalize(row_values_matrix, flags_Cost_Benefit, initCol = 2, initRow = 4)
 }

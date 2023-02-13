@@ -21,7 +21,6 @@
 
 normalize <- function(dfMatrix, vCost_Benefit, initRow = 1, initCol = 1) {
   # Test vector of flags X matrix of values dimentions
-  browser()
   workingMatrix <- dfMatrix[initRow:nrow(dfMatrix), initCol:ncol(dfMatrix)]
   if (length(vCost_Benefit) != ncol(workingMatrix)) {
     return("Error #01: Vector of Cost-Benefit flags must be same size of number of Criteria")
@@ -31,7 +30,7 @@ normalize <- function(dfMatrix, vCost_Benefit, initRow = 1, initCol = 1) {
   if (!identical(justBorC, c("B","C"))) {
     return("Error #02: Vector of flags must contains just strings initiated with B or C (i.e. b,c,B,C,Cost,Benefit,Ben etc.)")
   }
-
+  # Normalization loop
   flagsCxB <- toupper(substr(vCost_Benefit,1,1))
   for(iCol in 1:ncol(workingMatrix)){
     vAlternativeValues <- workingMatrix[1:nrow(workingMatrix),iCol]
