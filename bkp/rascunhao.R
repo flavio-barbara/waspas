@@ -1,9 +1,15 @@
-library(readxl)
-xlsx <- read_excel("TDF.xlsx", col_names = F)
-Matrix <- xlsx[4:nrow(xlsx), 2:ncol(xlsx)]
-vetpesos<-xlsx[2,2:10]
+# library(readxl)
+# choppers <- read_excel("./data/waspas_choppers.xlsx", col_names = F)
+# save(choppers, file="data/waspas_choppers.RData")
 
-normalized_matrix <- normalize(xlsx, xlsx[1, 2:ncol(xlsx)], initCol = 2, initRow = 4)
+load("data/waspas_choppers.RData")
+data("waspas_choppers")
+
+Matrix <- xlsx[4:nrow(xlsx), 2:ncol(xlsx)]
+vetpesos<-xlsx[2,2:ncol(xlsx)]
+
+
+normalized_matrix <- normalize(Matrix, vetpesos, initCol = 1, initRow = 1)
 
 wsm <- calcWSM(normalized_matrix, vetpesos)
 

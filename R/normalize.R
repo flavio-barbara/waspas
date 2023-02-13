@@ -21,6 +21,7 @@
 
 normalize <- function(dfMatrix, vCost_Benefit, initRow = 1, initCol = 1) {
   # Test vector of flags X matrix of values dimentions
+  browser()
   workingMatrix <- dfMatrix[initRow:nrow(dfMatrix), initCol:ncol(dfMatrix)]
   if (length(vCost_Benefit) != ncol(workingMatrix)) {
     return("Error #01: Vector of Cost-Benefit flags must be same size of number of Criteria")
