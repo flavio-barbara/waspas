@@ -12,10 +12,9 @@
 #'
 #' @examples
 #' calcWPM(normalized_matrix, vector_weights)
-#' wpm_matrix <- calcWPM(row_values_matrix, flags_Cost_Benefit)
+#' wpm_matrix <- calcWPM(row_values_matrix, vector_weights)
 #'
 #' @export
-#' @importFrom
 
 #################### Ranking for WPM Method: AxCNorm Matrix  ==>  AxC_WPM Matrix
 calcWPM <- function(AxCNorm, vWeights) {
@@ -25,7 +24,7 @@ calcWPM <- function(AxCNorm, vWeights) {
     return("Error #05: Vector of Weights values must be same size of number of Criteria")
   }
   # Test Vector of Weights contents, it must summarize 1
-  if (sum(sapply(vWeights,as.numeric)) != 1) {
+  if (sum(sapply(vWeights, as.numeric)) != 1) {
     return("Error #06: Values in Vector of Weights must summarize 1!")
   }
   # WPM Calculation loop
@@ -41,6 +40,6 @@ calcWPM <- function(AxCNorm, vWeights) {
   for(iRow in 1:nrow(workingMatrix)){
     AxC_WPM[iRow,"Points"] <- prod(sapply(workingMatrix[iRow,],as.numeric))
   }
-  vWPM <- AxC_WPM[,c("Points", "Alternatives")]
+  vWPM <- AxC_WPM[,c("Alternatives", "Points")]
   return(vWPM)
 }

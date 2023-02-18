@@ -16,37 +16,29 @@
 #' @format An object of class \code{"data.frame"}
 #' \describe{
 #'  \item{alternatives}{A set of helicopters names that can be bought in the marketplace.
-#'  These data are in the first column, from row 4 to the last.
-#'  Access them as choppers[4:nrow(choppers), 1]}
+#'  These data are in the first column, from row 4 to the last.}
 #'  \item{criteria}{set of criteria that a helicopter buyer may deem relevant for making a
-#'  purchase decision. These data are in the 3rd row, from col 2 to the last.
-#'  Access them as choppers[3, 2:ncol(choppers)]}
+#'  purchase decision. These data are in the 3rd row, from col 2 to the last.}
 #'  \item{weights}{Arbitrated by the decision maker, they relativize the value of the
 #'  criteria in percentage terms, thus making a weighting of these criteria.
-#'  These data are in the 2nd row, from col 2 to the last.
-#'  Access them as choppers[2, 2:ncol(choppers)]}
+#'  These data are in the 2nd row, from col 2 to the last.}
 #'  \item{flags}{They determine whether the specific criterion is cost, that is,
-#'  the smaller, the better, or benefit, the greater the better.}
-#'  These data are in the 1st row, from col 2 to the last.
-#'  Access them as choppers[1, 2:ncol(choppers)]}
-#'  \item{values}{Randomly generated value, within a range that makes sense}
-#'  These data are in the 5th row, from col 2 to the last.
-#'  Access them as choppers[5:nrow(choppers), 2:ncol(choppers)]}
-#' }
+#'  the smaller, the better, or benefit, the greater the better.
+#'  These data are in the 1st row, from col 2 to the last.}
+#'  \item{values}{Randomly generated value, within a range that makes sense
+#'  These data are in the 5th row, from col 2 to the last.}
+#'  }
 #' @references This data set was created with the help of Gustavo, Marcos & Marcio, in the work
 #' cited below:
 #' Soares de Assis, Gustavo & Santos, Marcos & Basilio, Marcio. (2023). Use of the WASPAS Method
 #' to Select Suitable Helicopters for Aerial Activity Carried Out by the Military Police of the
 #' State of Rio de Janeiro. Axioms. 12. 77. 10.3390.
-#' @keywords datasets
-#' @examples
 #'
+#' @keywords datasets
+#'
+#' @examples
 #' data(waspas_choppers)
 #' head(choppers)
-#' alternatives <- choppers[4:nrow(choppers), 1]
-#' criteria <- choppers[3, 2:ncol(choppers)]
-#' weights <- choppers[2, 2:ncol(choppers)]
-#' flags <- choppers[1, 2:ncol(choppers)]
-#' values <- sapply(choppers[5:nrow(choppers), 2:ncol(choppers)],as.numeric)
 #'
+#' @export
 "waspas_choppers"

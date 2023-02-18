@@ -1,7 +1,7 @@
 #' @title calcWSM
 #'
-#' @description Calculates the ranking for the alternative's set according to WSM method
-#' @param AxCNorm A data set object with Alternatives X Criteria with normalized values
+#' @description Calculates the ranking for the alternative's set according to WSM method.
+#' @param AxCNorm A data set object with normalized values of Alternatives X Criteria
 #' @param vWeights Contains a set of user-assigned values to weight the criteria.
 #'                 The sum of these weights must add up to 1.
 #'                 The format of this input is an array of values.
@@ -12,10 +12,9 @@
 #'
 #' @examples
 #' calcWSM(normalized_matrix, vector_weights)
-#' wsm_matrix <- calcWSM(row_values_matrix, flags_Cost_Benefit)
+#' wsm_matrix <- calcWSM(row_values_matrix, vector_weights)
 #'
 #' @export
-#' @importFrom
 
 #################### Ranking for WSM Method: AxCNorm Matrix  ==>  AxC_WSM Matrix
 calcWSM <- function(AxCNorm, vWeights) {
@@ -31,7 +30,10 @@ calcWSM <- function(AxCNorm, vWeights) {
   # WSM Calculation loop
   Points = rep(0,nrow(workingMatrix))
   Alternatives <- 1:nrow(workingMatrix)
-  AxC_WSM <- cbind(Points, Alternatives)
+
+  browser()
+
+  AxC_WSM <- cbind(Alternatives, Points)
   for(iCol in 1:ncol(workingMatrix)){
     for(iRow in 1:nrow(workingMatrix)){
       workingMatrix[iRow,iCol] <- toString(as.numeric(workingMatrix[iRow,iCol])
@@ -43,6 +45,6 @@ calcWSM <- function(AxCNorm, vWeights) {
     # v <- sapply(v,as.numeric)
     AxC_WSM[iRow,"Points"] <- sum(sapply(workingMatrix[iRow,],as.numeric))
   }
-  vWSM <- AxC_WSM[,c("Points", "Alternatives")]
+  vWSM <- AxC_WSM[,c("Alternatives","Points")]
   return(vWSM)
 }
